@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "live-server"
   },
   "repository": {
     "type": "git",
@@ -18,6 +18,6 @@
   },
   "homepage": "https://github.com/mathvbarone/projeto-caelum#readme",
   "dependencies": {
-    "http-server": "^0.10.0"
+    "live-server": "^1.2.0"
   }
 }

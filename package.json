@@ -1,0 +1,23 @@
+{
+  "name": "agenda-master",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mathvbarone/projeto-caelum.git"
+  },
+  "keywords": [],
+  "author": "Matheus Barone",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mathvbarone/projeto-caelum/issues"
+  },
+  "homepage": "https://github.com/mathvbarone/projeto-caelum#readme",
+  "dependencies": {
+    "http-server": "^0.10.0"
+  }
+}

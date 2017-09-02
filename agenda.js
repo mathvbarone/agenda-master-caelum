@@ -1,4 +1,4 @@
-(function(){
+(()=>{
 
   /******DECLARANDO OS CAMPOS DE INTERACAO DO USUARIO******/
   var ui = {
@@ -10,13 +10,13 @@
   /******DECLARANDO AS FUNÇÕES DE AÇÃO******/
 
   //CAMPOS DE VALIDAÇÃO
-  var validateFields = function(e){
+  var validateFields = e =>{
     e.preventDefault();
     var erros = 0;
     var data = {};
 
     //FUNÇÃO DE VERIFICAÇÃO DE PREENCHIMENTO DOS CAMPOS
-    ui.fields.forEach(function(field){
+    ui.fields.forEach(field =>{
       // SE TIVER VAZIO, MOSTRA A MENSAGEM DE ERRO
       if(field.value.trim().length === 0){
         field.classList.add("error");
@@ -41,22 +41,19 @@
 
 
   //FUNÇÃO QUE LIMPA OS CAMPOS
-  var cleanFields = function(){
-    ui.fields.forEach(function(field){
-      field.value="";
-    });
-  }
+  var cleanFields = ()=> ui.fields.forEach(field => field.value="");
+
 
 
 // FUNÇÃO DE EXEMPLO DE LOADING
-  // var loading = function(){
+  // var loading = ()=>{
   //   var p = document.createElement("p");
   //   p.classList.add("loading");
   //   p.textContent = "Carregando";
   //   document.body.appendChild(p);
   // }
   //
-  // var hideLoading = function(){
+  // var hideLoading = ()=>{
   //   setTimeout(function(){
   //     document.querySelector(".loading").style.display = "none";
   //   }, 3000);
@@ -64,7 +61,7 @@
 
 
   //FUNÇÃO QUE FAZ A REQUISIÇÃO, E SALVA AS INFORMAÇÕES
-  var saveData = function(contact){
+  var saveData = contact =>{
 
     // LOADING
     // loading();
@@ -81,7 +78,7 @@
     // FAZENDO A REQUISIÇÃO
     fetch("http://localhost:3000/contacts", conf)
         //SE A REQUISIÇÃO RETORNAR
-        .then(function(res){
+        .then(res =>{
           if(res.ok){
             cleanFields();
             listAll();
@@ -89,13 +86,11 @@
           }
         })
         //SE A REQUISIÇÃO NÃO RETORNAR
-        .catch(function(err){
-          console.error(err, "O Banco de dados não esta respondendo :/");
-        });
+        .catch(err => console.error(err, "O Banco de dados não esta respondendo :/"));
   };
 
   // LISTAS OS ITENS
-  var listAll = function(){
+  var listAll = ()=>{
     console.log("Listar Resultados");
   };
 
@@ -104,7 +99,6 @@
   var initialize = function(){
     //MAPEANDO OS EVENTOS
     ui.button.addEventListener("click", validateFields);
-
   }();
 
 })();

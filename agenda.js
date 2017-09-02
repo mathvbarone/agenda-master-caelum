@@ -1,7 +1,7 @@
 (()=>{
 
   /******DECLARANDO OS CAMPOS DE INTERACAO DO USUARIO******/
-  var ui = {
+  const ui = {
     fields: document.querySelectorAll("input"),
     button: document.querySelector("button"),
     table: document.querySelector("tbody")
@@ -10,10 +10,10 @@
   /******DECLARANDO AS FUNÇÕES DE AÇÃO******/
 
   //CAMPOS DE VALIDAÇÃO
-  var validateFields = e =>{
+  const validateFields = e =>{
     e.preventDefault();
-    var erros = 0;
-    var data = {};
+    const erros = 0;
+    const data = {};
 
     //FUNÇÃO DE VERIFICAÇÃO DE PREENCHIMENTO DOS CAMPOS
     ui.fields.forEach(field =>{
@@ -41,17 +41,17 @@
 
 
   //FUNÇÃO QUE LIMPA OS CAMPOS
-  var cleanFields = ()=> ui.fields.forEach(field => field.value="");
+  const cleanFields = ()=> ui.fields.forEach(field => field.value="");
 
 // FUNÇÃO DE EXEMPLO DE LOADING
-  // var loading = ()=>{
-  //   var p = document.createElement("p");
+  // const loading = ()=>{
+  //   const p = document.createElement("p");
   //   p.classList.add("loading");
   //   p.textContent = "Carregando";
   //   document.body.appendChild(p);
   // }
   //
-  // var hideLoading = ()=>{
+  // const hideLoading = ()=>{
   //   setTimeout(function(){
   //     document.querySelector(".loading").style.display = "none";
   //   }, 3000);
@@ -59,16 +59,16 @@
 
 
   //FUNÇÃO QUE FAZ A REQUISIÇÃO, E ENVIA AS INFORMAÇÕES
-  var saveData = contact =>{
+  const saveData = contact =>{
 
     // LOADING
     // loading();
 
     //CRIANDO O HEADER
-    var headers = new Headers();
+    const headers = new Headers();
     headers.append("Content-type", "application/json");
     //CONFIGURANDO O HEADER
-    var conf = {
+    const conf = {
       method: "POST",
       body: JSON.stringify(contact),
       headers
@@ -89,13 +89,13 @@
 
 
   // REQUISICAO PARA LISTAR OS CONTATOS
-  var listAll = ()=>{
+  const listAll = ()=>{
 
     //CRIANDO O HEADER
-    var headers = new Headers();
+    const headers = new Headers();
     headers.append("Content-type", "application/json");
     //CONFIGURANDO O HEADER
-    var conf = {
+    const conf = {
       method: "GET",
       headers
     }
@@ -106,9 +106,9 @@
             return res.json();
         })
         .then(contactsList => {
-          var html = [];
+          const html = [];
           contactsList.forEach((contact)=>{
-            var line = `<tr>
+            const line = `<tr>
                           <td>${contact.id}</td>
                           <td>${contact.name}</td>
                           <td>${contact.email}</td>
@@ -134,16 +134,16 @@
   };
 
 
-  var removeContact = e =>{
-    var id = e.target.dataset.id;
+  const removeContact = e =>{
+    const id = e.target.dataset.id;
     if(id){
 
       //CRIANDO O HEADER
-      var headers = new Headers();
+      const headers = new Headers();
       headers.append("Content-type", "application/json");
 
       //CONFIGURANDO O HEADER
-      var conf = {
+      const conf = {
         method: "DELETE",
         headers
       }
@@ -155,7 +155,7 @@
 
 
   // CRIANDO FUNÇÃO DE INICIAÇÃO
-  var initialize = function(){
+  const initialize = function(){
     //MAPEANDO OS EVENTOS
     ui.table.addEventListener("click", removeContact);
     listAll();

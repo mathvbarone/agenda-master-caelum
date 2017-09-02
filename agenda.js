@@ -43,8 +43,6 @@
   //FUNÇÃO QUE LIMPA OS CAMPOS
   var cleanFields = ()=> ui.fields.forEach(field => field.value="");
 
-
-
 // FUNÇÃO DE EXEMPLO DE LOADING
   // var loading = ()=>{
   //   var p = document.createElement("p");
@@ -73,7 +71,7 @@
     var conf = {
       method: "POST",
       body: JSON.stringify(contact),
-      headers: headers
+      headers
     }
     // FAZENDO A REQUISIÇÃO
     fetch("http://localhost:3000/contacts", conf)
@@ -90,7 +88,6 @@
   };
 
 
-
   // REQUISICAO PARA LISTAR OS CONTATOS
   var listAll = ()=>{
 
@@ -100,7 +97,7 @@
     //CONFIGURANDO O HEADER
     var conf = {
       method: "GET",
-      headers: headers
+      headers
     }
     // FAZENDO A REQUISIÇÃO
     fetch("http://localhost:3000/contacts", conf)
@@ -116,6 +113,7 @@
                           <td>${contact.name}</td>
                           <td>${contact.email}</td>
                           <td>${contact.phone}</td>
+                          <td><a href="#" data-id="${contact.id}" title="Excluir">Excluir</a></td>
                         </tr>`;
             html.push(line);
           });
@@ -127,9 +125,30 @@
   };
 
 
+  var removeContact = e =>{
+    var id = e.target.dataset.id;
+    if(id){
+
+      //CRIANDO O HEADER
+      var headers = new Headers();
+      headers.append("Content-type", "application/json");
+
+      //CONFIGURANDO O HEADER
+      var conf = {
+        method: "DELETE",
+        headers
+      }
+      fetch(`http://localhost:3000/contacts/${id}`, conf)
+      .then(listAll)
+      .catch(err => console.error(err, "O Banco de Dados não esta respondendo :/"));
+    }
+  }
+
+
   // CRIANDO FUNÇÃO DE INICIAÇÃO
   var initialize = function(){
     //MAPEANDO OS EVENTOS
+    ui.table.addEventListener("click", removeContact);
     listAll();
     ui.button.addEventListener("click", validateFields);
   }();

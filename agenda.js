@@ -117,11 +117,20 @@
                         </tr>`;
             html.push(line);
           });
+
+          // MENSAGEM QUE APARECE QUANDO A TABELA ESTA VAZIA
+          if(contactsList.length === 0){
+            html.push(`<tr>
+                        <td colspan="5" class="empty">Não existem dados registrados!</td>
+                      </tr>`);
+          }
+
           ui.table.innerHTML = html.join("");
 
         })
         //SE A REQUISIÇÃO NÃO RETORNAR
         .catch(err => console.error(err, "O Banco de Dados não esta respondendo :/"));
+
   };
 
 

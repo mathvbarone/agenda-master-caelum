@@ -38,6 +38,12 @@
     }
   };
 
+
+  //FUNÇÃO QUE LIMPA OS CAMPOS
+  var cleanFields = function(){
+    console.log("Limpar campos");
+  }
+
   //FUNÇÃO QUE FAZ A REQUISIÇÃO, E SALVA AS INFORMAÇÕES
   var saveData = function(contact){
     //CRIANDO O HEADER
@@ -51,13 +57,23 @@
     }
     // FAZENDO A REQUISIÇÃO
     fetch("http://localhost:3000/contacts", conf)
-
-
-
+        //SE A REQUISIÇÃO RETORNAR
+        .then(function(res){
+          if(res.ok){
+            cleanFields();
+            listAll();
+          }
+        })
+        //SE A REQUISIÇÃO NÃO RETORNAR
+        .catch(function(err){
+          console.error(err, "O Banco de dados não esta respondendo :/");
+        });
   };
 
   // LISTAS OS ITENS
-  var listAll = function(){};
+  var listAll = function(){
+    console.log("Listar Resultados");
+  };
 
 
   // CRIANDO FUNÇÃO DE INICIAÇÃO

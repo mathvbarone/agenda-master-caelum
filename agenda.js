@@ -4,7 +4,7 @@
   var ui = {
     fields: document.querySelectorAll("input"),
     button: document.querySelector("button"),
-    table: document.querySelector("table")
+    table: document.querySelector("tbody")
   };
 
   /******DECLARANDO AS FUNÇÕES DE AÇÃO******/
@@ -60,7 +60,7 @@
   // }
 
 
-  //FUNÇÃO QUE FAZ A REQUISIÇÃO, E SALVA AS INFORMAÇÕES
+  //FUNÇÃO QUE FAZ A REQUISIÇÃO, E ENVIA AS INFORMAÇÕES
   var saveData = contact =>{
 
     // LOADING
@@ -86,18 +86,51 @@
           }
         })
         //SE A REQUISIÇÃO NÃO RETORNAR
-        .catch(err => console.error(err, "O Banco de dados não esta respondendo :/"));
+        .catch(err => console.error(err, "O Banco de Dados não esta respondendo :/"));
   };
 
-  // LISTAS OS ITENS
+
+
+  // REQUISICAO PARA LISTAR OS CONTATOS
   var listAll = ()=>{
-    console.log("Listar Resultados");
+
+    //CRIANDO O HEADER
+    var headers = new Headers();
+    headers.append("Content-type", "application/json");
+    //CONFIGURANDO O HEADER
+    var conf = {
+      method: "GET",
+      headers: headers
+    }
+    // FAZENDO A REQUISIÇÃO
+    fetch("http://localhost:3000/contacts", conf)
+        //SE A REQUISIÇÃO RETORNAR
+        .then(res =>{
+            return res.json();
+        })
+        .then(contactsList => {
+          var html = [];
+          contactsList.forEach((contact)=>{
+            var line = `<tr>
+                          <td>${contact.id}</td>
+                          <td>${contact.name}</td>
+                          <td>${contact.email}</td>
+                          <td>${contact.phone}</td>
+                        </tr>`;
+            html.push(line);
+          });
+          ui.table.innerHTML = html.join("");
+
+        })
+        //SE A REQUISIÇÃO NÃO RETORNAR
+        .catch(err => console.error(err, "O Banco de Dados não esta respondendo :/"));
   };
 
 
   // CRIANDO FUNÇÃO DE INICIAÇÃO
   var initialize = function(){
     //MAPEANDO OS EVENTOS
+    listAll();
     ui.button.addEventListener("click", validateFields);
   }();
 

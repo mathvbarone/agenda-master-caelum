@@ -1,4 +1,5 @@
 (function(){
+
   /******DECLARANDO OS CAMPOS DE INTERACAO DO USUARIO******/
   var ui = {
     fields: document.querySelectorAll("input"),
@@ -41,11 +42,33 @@
 
   //FUNÇÃO QUE LIMPA OS CAMPOS
   var cleanFields = function(){
-    console.log("Limpar campos");
+    ui.fields.forEach(function(field){
+      field.value="";
+    });
   }
+
+
+// FUNÇÃO DE EXEMPLO DE LOADING
+  // var loading = function(){
+  //   var p = document.createElement("p");
+  //   p.classList.add("loading");
+  //   p.textContent = "Carregando";
+  //   document.body.appendChild(p);
+  // }
+  //
+  // var hideLoading = function(){
+  //   setTimeout(function(){
+  //     document.querySelector(".loading").style.display = "none";
+  //   }, 3000);
+  // }
+
 
   //FUNÇÃO QUE FAZ A REQUISIÇÃO, E SALVA AS INFORMAÇÕES
   var saveData = function(contact){
+
+    // LOADING
+    // loading();
+
     //CRIANDO O HEADER
     var headers = new Headers();
     headers.append("Content-type", "application/json");
@@ -62,6 +85,7 @@
           if(res.ok){
             cleanFields();
             listAll();
+            // hideLoading();
           }
         })
         //SE A REQUISIÇÃO NÃO RETORNAR
